@@ -1,0 +1,18 @@
+﻿@page "/person/edit/{PersonId:int}"
+
+<h3>Edit Person</h3>
+@if (Person != null)
+{
+    <PersonForm Person="Person" OnValidSubmit="Edit"></PersonForm>
+}
+
+
+
+@code {
+    Person Person = new Person();
+    [Parameter] public int PersonId { get; set; }
+    void Edit()
+    {
+
+    }
+}

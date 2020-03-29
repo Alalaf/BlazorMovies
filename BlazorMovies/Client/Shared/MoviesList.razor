@@ -1,0 +1,26 @@
+﻿
+    <div class="movies-container">
+        <GenericList List="movies">
+            <ElementTemp>
+                <IndivisualMovie movie="context"  DeleteMovie="DeleteMovie" />
+            </ElementTemp>
+        </GenericList>
+
+    </div>
+
+
+
+
+@code {
+
+    [Parameter]public List<Movie> movies { get; set; }
+
+    //bool DisplayDelete = false;
+
+    private void DeleteMovie(Movie movie)
+    {
+        
+        movies.Remove(movie);
+    }
+   
+}

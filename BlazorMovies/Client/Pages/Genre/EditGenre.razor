@@ -1,0 +1,20 @@
+﻿@page "/Genre/edit/{GenreId:int}"
+
+<h3>Edit Genre</h3>
+
+@if (genre != null)
+{
+    <GenreForm Genre="genre" OnValidSubmit="Edit" />
+}
+
+
+
+
+@code {
+    [Parameter] public int GenreId { get; set; }
+    [Parameter] public Genre genre { get; set; } 
+    void Edit()
+    {
+
+    }
+}

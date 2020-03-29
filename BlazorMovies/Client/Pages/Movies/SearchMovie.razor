@@ -1,0 +1,79 @@
+﻿@page "/movies/search"
+@inject IRepositoryMovie RepoMovie
+
+
+<h3>SearchMovie</h3>
+
+<div class="form-inline">
+    <div class="form-group mb-2">
+        <label for="title" class="sr-only">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Movie Title"
+               @bind-value="title" @bind-value:event="oninput"
+               @onkeypress="@((KeyboardEventArgs e)=>TitleKeyPress(e))" />
+    </div>
+    <div class="form-group mx-sm-3 mb2">
+        <select class="form-control" @bind="selectedgenre">
+            <option value="0">
+                --Select a Genre
+            </option>
+            @foreach (var genre in Genres)
+            {
+                <option value="@genre.Id">@genre.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="checkbox" class="form-check-input" id="upcoming" @bind="upcoming" />
+        <label class="form-check-label" for="upcoming">
+            Upcoming Releases
+        </label>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="checkbox" class="form-check-input" id="upcoming" @bind="intheaters" />
+        <label class="form-check-label" for="intheaters">
+            In Theaters
+        </label>
+    </div>
+
+    <button type="button" class="btn btn-primary mb-2 mx-sm-3" @onclick="SearchForMovies">Search</button>
+    <button type="button" class="btn btn-danger mb-2 mx-sm-3" @onclick="Clear">Clear</button>
+</div>
+
+
+<MoviesList movies="Movies"></MoviesList>
+
+@code {
+    private List<Movie> Movies;
+    String title = "";
+    string selectedgenre = "0";
+    bool upcoming = false;
+    bool intheaters = false;
+    private List<Genre> Genres = new List<Genre>();
+
+    protected override void OnInitialized()
+    {
+        Movies = RepoMovie.GetMovies();
+    }
+
+    private void SearchForMovies()
+    {
+        Movies = Movies.Where(m => m.Title.Contains(title)).ToList();
+    }
+
+    private void Clear()
+    {
+        Movies = RepoMovie.GetMovies();
+        title = "";
+        selectedgenre="0";
+        bool upcoming = false;
+        bool intheaters = false;
+    }
+
+    private void TitleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            SearchForMovies();
+        }
+    }
+}

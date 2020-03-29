@@ -1,0 +1,36 @@
+﻿@page "/"
+@inject IRepositoryMovie RepoMovie
+
+<h1>Movies</h1>
+<div>
+    <MoviesList movies="movies">
+       
+    </MoviesList>
+
+</div>
+<CustomTypehead SearchMethod="SearchMethod">
+    <ResultTemplate>
+        @context
+    </ResultTemplate>
+</CustomTypehead>
+
+
+@code{
+
+    private List<Movie> movies;
+
+    private async Task<IEnumerable<string>> SearchMethod(String searchtext)
+    {
+        await Task.Delay(2000);
+        if(searchtext == "test") { return Enumerable.Empty<string>(); }
+        return new List<string>() { "Ahmed", "Roma" };
+    }
+
+
+    protected override void OnInitialized()
+    {
+        movies = RepoMovie.GetMovies();
+
+    }
+
+}

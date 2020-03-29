@@ -1,0 +1,30 @@
+﻿@typeparam TItem
+
+@if (List == null)
+{
+    @*<img src="https://lh3.googleusercontent.com/proxy/YSQDk0Crpe5h0bWw_Ki_wcMolYUMEQllpTSbzeefaLRlPV9yA5WIsWFdSFji19FBVlbgIEI9_cOK4vnajPB3_EZP31EqrYBkwPr0IiRSNw9ufByCqqDbwQzjwhzFtYQ67xQT3Bg3JWvVRmPo3c0OeyswlRrihbDg9UPzcy6UBDJiADuEbaqGKZy82n0k5iztsMIsxriKCLYFNqfnjHQc43fVK3RdBN3IGNvQ"/>*@
+    @NullTemp
+}
+else if (List.Count == 0)
+{
+    @EmptyTemp
+
+}
+else
+{
+    
+    @foreach (var element in List)
+    {
+        
+        @ElementTemp(element)
+    }
+}
+
+
+@code {
+    [Parameter]public RenderFragment NullTemp { get; set; }
+    [Parameter]public RenderFragment EmptyTemp { get; set; }
+    [Parameter] public RenderFragment<TItem> ElementTemp { get; set; }
+    [Parameter] public List<TItem> List { get; set; }
+
+}
