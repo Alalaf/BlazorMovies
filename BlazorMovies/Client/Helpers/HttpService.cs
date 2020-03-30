@@ -9,7 +9,7 @@ using System.Text;
 
 namespace BlazorMovies.Client.Helpers
 {
-    class HttpService: IHttpService
+    public class HttpService: IHttpService
     {
         private readonly HttpClient _httpClient;
         public HttpService(HttpClient httpClient)

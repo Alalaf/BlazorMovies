@@ -1,11 +1,21 @@
 ﻿@page "/person/create"
+@inject IReopsitoryPerson RepoPerson
+@inject NavigationManager  NavigationManager
 
 <PersonForm Person="Person" OnValidSubmit="Create"></PersonForm>
 
 @code {
     Person Person = new Person();
-    void Create()
+    private async Task Create()
     {
-
+        try
+        {
+            await RepoPerson.CreatePerson(Person);
+            NavigationManager.NavigateTo("person");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

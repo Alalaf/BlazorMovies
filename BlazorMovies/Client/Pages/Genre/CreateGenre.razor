@@ -1,5 +1,6 @@
 ﻿@page "/genre/create"
-
+@inject IReopsitoryGenre repogenre
+@inject NavigationManager NavigationManager
 <h3>Create Genre</h3>
 
 
@@ -8,8 +9,16 @@
 @code {
     private Genre genre = new Genre();
 
-    private void Create()
+    private async Task Create()
     {
-
+        try
+        {
+            await repogenre.CreateGenre(genre);
+            NavigationManager.NavigateTo("genres");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

@@ -7,22 +7,21 @@ using System.Threading.Tasks;
 
 namespace BlazorMovies.Client.Repository
 {
-    public class ReopsitoyGenre: IReopsitoyGenre
+    public class ReopsitoryPerson: IReopsitoryPerson
     {
-        private string url = "api/genres";
+        private string url = "api/People";
         private readonly IHttpService _httpservice;
-        public ReopsitoyGenre(IHttpService httpservice)
+        public ReopsitoryPerson(IHttpService httpservice)
         {
             _httpservice = httpservice;
         }
-        public async Task CreateGenre(Genre genre)
+        public async Task CreatePerson(Person person)
         {
-            var reponse = await _httpservice.Post<Genre>(url, genre);
+            var reponse = await _httpservice.Post<Person>(url, person);
             if (!reponse.Success)
             {
                 throw new ApplicationException(await reponse.GetBody());
             }
         }
-        
     }
 }

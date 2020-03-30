@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Blazor.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorMovies.Shared.Models;
 using Blazor.FileReader;
+using BlazorMovies.Client.Helpers;
+using BlazorMovies.Client.Repository;
 
 namespace BlazorMovies.Client
 {
@@ -23,6 +25,9 @@ namespace BlazorMovies.Client
         {
             services.AddOptions();
             services.AddTransient<IRepositoryMovie, RepositoryMovie>();
+            services.AddScoped<IHttpService, HttpService>();
+            services.AddScoped<IReopsitoryGenre, ReopsitoryGenre>();
+            services.AddScoped<IReopsitoryPerson, ReopsitoryPerson>();
             services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
         }
     }

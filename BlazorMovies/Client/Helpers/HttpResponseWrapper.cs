@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorMovies.Client.Helpers
 {
-    class HttpResponseWrapper<T>
+    public class HttpResponseWrapper<T>
     {
         public HttpResponseWrapper(T response, bool success, HttpResponseMessage httpResponseMessage)
         {
